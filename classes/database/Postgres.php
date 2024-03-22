@@ -220,7 +220,8 @@ class Postgres extends ADODB_base {
 	function arrayClean(&$arr) {
 		foreach ($arr as $k => $v) {
 			if ($v === null) continue;
-			$arr[$k] = pg_escape_string($v);
+			$conn = $this->conn->_connectionID;
+			$arr[$k] = pg_escape_string($conn,$v);
 		}
 		return $arr;
 	}
